@@ -44,7 +44,7 @@
         <div class="pass">비밀번호를 잊으셨나요?(준비중)</div>
         <input type="submit" name="commit" value="로그인">
         <div class="signup_link">
-            회원이 아니신가요? <a href="Join_Account.jsp">회원가입 하기</a>
+            회원이 아니신가요? <a href="/join">회원가입 하기</a>
         </div>
     </form>
 </div>

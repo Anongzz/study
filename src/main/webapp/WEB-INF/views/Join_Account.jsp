@@ -54,7 +54,7 @@ function check_pw(){
 			</div> -->
 			<input type="submit" name="commit" value="회원가입">
 			<div class="signup_link">
-				<a href="index.jsp">뒤로가기</a>
+				<a href="/">뒤로가기</a>
 			</div>
 		</form>
 	</div>

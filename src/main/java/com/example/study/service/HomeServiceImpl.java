@@ -28,4 +28,18 @@ public class HomeServiceImpl implements HomeService {
             return "fail";
         }
     }
+
+    @Override
+    public String Login(String userID, String userPW){
+        UserDTO userDTO = UserDTO.builder()
+                .userID(userID)
+                .userPW(userPW)
+                .build();
+
+        if(userDAO.login(userDTO)==1){
+            return "success";
+        }else {
+            return "fail";
+        }
+    }
 }

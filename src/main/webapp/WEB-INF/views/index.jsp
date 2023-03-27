@@ -2,7 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ page import = "java.io.PrintWriter"%>
 <%
-    session.removeAttribute("id"); //안뇨쇼 깃 첨써바용 -.-
+    session.removeAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@
 <p>sessionValue: <%=ObjToStringValue %></p>
 <div class="center anim">
     <h2>주차 요금 정산 프로그램</h2>
-    <form method="post" action="userLoginAction.jsp">
+    <form method="post" action="/login">
         <div class="txt_field" >
             <input type="text" name="userID" required>
             <span></span>

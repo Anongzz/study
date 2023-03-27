@@ -1,6 +1,5 @@
 package com.example.study.controller;
 
-import com.example.study.dto.UserDTO;
 import com.example.study.service.HomeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +13,12 @@ public class HomeController {
         this.homeService = homeService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/")//메인화면
     public String helloJSP(){
         return "index";
     }
 
-    @GetMapping("/join")
+    @GetMapping("/join")//회원가입 페이지
     public String joinAccount(){
         return "Join_Account";
     }
@@ -35,6 +34,19 @@ public class HomeController {
         }
 
     }
+
+    @PostMapping("/login")
+    public String loginCheckUser(String userID, String userPW){
+        String result = homeService.Login(userID,userPW);
+
+        if(result.equalsIgnoreCase("success")){
+            return "success";
+        }else {
+            return "fail";
+        }
+    }
+
+
 
 
 }

@@ -2,8 +2,13 @@ package com.example.study.controller;
 
 import com.example.study.service.HomeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class HomeController {
@@ -36,16 +41,17 @@ public class HomeController {
     }
 
     @PostMapping("/login")
-    public String loginCheckUser(String userID, String userPW){
+    public String loginCheckUser(String userID, String userPW, HttpServletRequest request){
         String result = homeService.Login(userID,userPW);
 
         if(result.equalsIgnoreCase("success")){
-            return "success";
+            HttpSession session = request.getSession();
+            session.setAttribute("id",userID);
+            return "userBuildings";
         }else {
             return "fail";
         }
     }
-
 
 
 

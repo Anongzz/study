@@ -4,6 +4,7 @@ import com.example.study.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 
 @Component
@@ -48,6 +49,7 @@ public class UserDAO {
     }
 
     public int login(UserDTO userDTO){
+
         Connection conn = null;
         PreparedStatement pstmt = null;
         String SQL = "SELECT userID, AES_DECRYPT(UNHEX(userPW), 'ABC')  from parkinguser where userID = ? and ? = (SELECT cast(AES_DECRYPT(UNHEX(userPW), 'ABC') as char(100)) FROM parkinguser where userID=?);";
@@ -77,6 +79,7 @@ public class UserDAO {
             }
             rs.close();
             if (getID.equals(userID) && getPW.equals(userPW)) {//로그인 성공
+
                 return 1;
             } else {//로그인 실패
                 return 2;
@@ -95,5 +98,9 @@ public class UserDAO {
 
         return 2;
     }
+
+
+
+
 
 }

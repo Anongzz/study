@@ -26,7 +26,7 @@ public class UserDAO {
     @Value("${mysql.password.code}")
     private String aesCode;
 
-    public int join(UserDTO userDTO){
+    public int join(UserDTO userDTO){//회원가입 정보 추가 쿼리 전송
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -55,7 +55,7 @@ public class UserDAO {
         return -1;
     } //join()
 
-    public int login(UserDTO userDTO){
+    public int login(UserDTO userDTO){//로그인시 입력값과 서버 데이터 대조
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -105,7 +105,7 @@ public class UserDAO {
         return 2;
     } //login()
 
-    public int GetParkingList(UserDTO userDTO){
+    public int GetParkingList(UserDTO userDTO){//유저 고유데이터 페이지 진입 시 세션값이 유효한지 조회
         String userID = userDTO.getUserID();
         String checkID = userDTO.getCheckID();
 
@@ -122,4 +122,4 @@ public class UserDAO {
 
 
 
-}
+}//class UserDAO

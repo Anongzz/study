@@ -3,7 +3,7 @@ package com.example.study.user;
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class ParkingPrice {
+public class ParkingPrice {//유저 고유데이터에 표시할 주차요금 합계 계산 클래스
 	boolean[] parking = new boolean[10000]; //차량 입차 여부
     int[] parkingTime = new int[10000]; //차량 총 누적 주차 시간
     Map<Integer, Integer> map = new HashMap<>();
@@ -87,7 +87,7 @@ public class ParkingPrice {
 		DecimalFormat df = new DecimalFormat("###,###");
 		String value_str = df.format(value);
 		return value_str;
-	}
+	}//comma()
     
     //주차요금 계산
     public int cal(int nMinute,int nCost,int exMinute, int exCost ,int useMinute) {
@@ -103,5 +103,5 @@ public class ParkingPrice {
         }
 
         return cost;
-    }
-}
+    }//cal()
+}//class ParkingPrice

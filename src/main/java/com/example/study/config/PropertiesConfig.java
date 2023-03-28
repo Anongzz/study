@@ -8,9 +8,9 @@ import org.springframework.core.io.ClassPathResource;
 @Configuration
 public class PropertiesConfig {
     @Bean
-    public PropertiesFactoryBean commonProperties(){
+    public PropertiesFactoryBean commonProperties(){// jsp에 application.properties key, value 값 전송
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         bean.setLocations(new ClassPathResource("application.properties"));
         return bean;
-    }
-}
+    }//commonProperties()
+}//class PropertiesConfig

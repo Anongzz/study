@@ -29,7 +29,7 @@ public class HomeServiceImpl implements HomeService {
         }else {
             return "fail";
         }
-    }
+    }//Account()
 
     @Override
     public String Login(String userID, String userPW){
@@ -43,7 +43,7 @@ public class HomeServiceImpl implements HomeService {
         }else {
             return "fail";
         }
-    }
+    }//Login()
 
     @Override
     public String UserElementList(String userID, String userParking,String checkID){
@@ -59,5 +59,5 @@ public class HomeServiceImpl implements HomeService {
             return "fail";
         }
 
-    }
-}
+    }//UserElementList()
+}//class HomeServiceImpl

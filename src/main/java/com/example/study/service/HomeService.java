@@ -7,4 +7,4 @@ public interface HomeService{
     String Login(String userID, String userPW);
 
     String UserElementList(String userID, String parkingName, String CheckID);
-}
+}//interface HomeService

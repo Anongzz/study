@@ -29,7 +29,7 @@ public class HomeController {
         return "Join_Account";
     }
 
-    @PostMapping("/account")
+    @PostMapping("/account")//회원가입 데이터 전송 및 추가
     public String accountUser(String userID, String userName, String userPW) {
         String result = homeService.Account(userID,userName,userPW);
 
@@ -39,9 +39,9 @@ public class HomeController {
             return "fail";
         }
 
-    }
+    }//accountUser()
 
-    @PostMapping("/login")
+    @PostMapping("/login")//로그인 | 로그인 성공시 세션에 유저ID 저장
     public String loginCheckUser(String userID, String userPW, HttpServletRequest request){
         String result = homeService.Login(userID,userPW);
 
@@ -52,9 +52,9 @@ public class HomeController {
         }else {
             return "fail";
         }
-    }
+    }//loginCheckUser()
 
-    @GetMapping("/parking/{userID}/{PName}")
+    @GetMapping("/parking/{userID}/{PName}")//유저 고유 데이터 조회 | 받아온 userID와 세션의 유저ID를 대조
     public String ParkingList(@PathVariable String PName, @PathVariable String userID, HttpServletRequest request){
 
         HttpSession session = request.getSession();
@@ -68,8 +68,8 @@ public class HomeController {
         }else {
             return "fail";
         }
-    }
+    }// ParkingList()
 
 
 
-}
+}//class HomeController

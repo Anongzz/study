@@ -4,6 +4,8 @@ import com.example.study.dao.UserDAO;
 import com.example.study.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class HomeServiceImpl implements HomeService {
 
@@ -41,5 +43,21 @@ public class HomeServiceImpl implements HomeService {
         }else {
             return "fail";
         }
+    }
+
+    @Override
+    public String UserElementList(String userID, String userParking,String checkID){
+        UserDTO userDTO = UserDTO.builder()
+                .userID(userID)
+                .userParking(userParking)
+                .checkID(checkID)
+                .build();
+
+        if(userDAO.GetParkingList(userDTO)==1){
+            return "success";
+        }else {
+            return "fail";
+        }
+
     }
 }

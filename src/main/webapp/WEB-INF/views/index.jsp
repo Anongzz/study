@@ -3,6 +3,7 @@
 <%@ page import = "java.io.PrintWriter"%>
 <%
     session.removeAttribute("id");
+    session.removeAttribute("buildingName");
 %>
 <!DOCTYPE html>
 <html>

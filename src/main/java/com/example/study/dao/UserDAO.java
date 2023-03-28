@@ -3,8 +3,12 @@ package com.example.study.dao;
 import com.example.study.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.*;
 
 @Component
@@ -49,7 +53,7 @@ public class UserDAO {
         }
 
         return -1;
-    }
+    } //join()
 
     public int login(UserDTO userDTO){
 
@@ -99,7 +103,20 @@ public class UserDAO {
         }
 
         return 2;
-    }
+    } //login()
+
+    public int GetParkingList(UserDTO userDTO){
+        String userID = userDTO.getUserID();
+        String checkID = userDTO.getCheckID();
+
+        if(userID.equals(checkID)){
+            return 1;
+        }else {
+            return 2;
+        }
+
+
+    } //GetParkingList()
 
 
 

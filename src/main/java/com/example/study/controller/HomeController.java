@@ -4,6 +4,7 @@ import com.example.study.service.HomeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +49,22 @@ public class HomeController {
             HttpSession session = request.getSession();
             session.setAttribute("id",userID);
             return "userBuildings";
+        }else {
+            return "fail";
+        }
+    }
+
+    @GetMapping("/parking/{userID}/{PName}")
+    public String ParkingList(@PathVariable String PName, @PathVariable String userID, HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        String CheckID = (String) session.getAttribute("id");
+        String result = homeService.UserElementList(userID,PName,CheckID);
+
+
+        if(result.equalsIgnoreCase("success")){
+            session.setAttribute("buildingName",PName);
+            return "userIndependentParking";
         }else {
             return "fail";
         }

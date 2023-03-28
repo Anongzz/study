@@ -19,13 +19,16 @@ public class UserDAO {
     @Value("${spring.datasource.password}")
     private String password;
 
+    @Value("${mysql.password.code}")
+    private String aesCode;
+
     public int join(UserDTO userDTO){
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
             conn = DriverManager.getConnection(url,name,password);
-            String sql = "INSERT INTO parkinguser VALUES (?,?,HEX(AES_ENCRYPT(?,'ABC')))";
+            String sql = "INSERT INTO parkinguser VALUES (?,?,HEX(AES_ENCRYPT(?,aesCode)))";
 
             pstmt = conn.prepareStatement(sql);
 
@@ -52,8 +55,7 @@ public class UserDAO {
 
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String SQL = "SELECT userID, AES_DECRYPT(UNHEX(userPW), 'ABC')  from parkinguser where userID = ? and ? = (SELECT cast(AES_DECRYPT(UNHEX(userPW), 'ABC') as char(100)) FROM parkinguser where userID=?);";
-
+        String SQL = "SELECT userID, AES_DECRYPT(UNHEX(userPW), '"+aesCode+"')  from parkinguser where userID = ? and ? = (SELECT cast(AES_DECRYPT(UNHEX(userPW),'"+aesCode+"' ) as char(100)) FROM parkinguser where userID=?);";
         String getID = "";
 
         String getPW = "";
@@ -75,7 +77,7 @@ public class UserDAO {
             while (rs.next()) {
                 // 값 받기
                 getID = rs.getString("userID");
-                getPW = rs.getString("AES_DECRYPT(UNHEX(userPW), 'ABC')");
+                getPW = rs.getString("AES_DECRYPT(UNHEX(userPW), '"+aesCode+"')");
             }
             rs.close();
             if (getID.equals(userID) && getPW.equals(userPW)) {//로그인 성공

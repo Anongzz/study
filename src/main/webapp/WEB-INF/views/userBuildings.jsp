@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*, java.util.*, java.io.*" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% request.setCharacterEncoding("utf-8"); %>
+<spring:eval expression="@commonProperties['spring.datasource.name']" var="name"/>
+<spring:eval expression="@commonProperties['spring.datasource.password']" var="password"/>
+<spring:eval expression="@commonProperties['spring.datasource.url']" var="url"/>
+<spring:eval expression="@commonProperties['spring.datasource.driver-class-name']" var="driver"/>
 
 <!DOCTYPE html>
 <html>
@@ -160,15 +165,14 @@ if(ObjToStringValue==null){
 	script.println("location.href='/';");
 	script.println("</script>");
 }
+String mysqlPW = (String) pageContext.getAttribute("password");
+String mysqlName = (String) pageContext.getAttribute("name");
+String driver = (String) pageContext.getAttribute("driver");
+String url = (String) pageContext.getAttribute("url");
 
-String driver = "com.mysql.cj.jdbc.Driver";
-String url = "jdbc:mysql://127.0.0.1:3306/parking";
-        
 Class.forName(driver);
 
-Connection conn = DriverManager.getConnection(url,"root","1234");
-
-//Statement stmt = conn.createStatement();
+Connection conn = DriverManager.getConnection(url,mysqlName,mysqlPW);
 
 String sql = "SELECT buildingName, buildingCreateTime FROM buildingInformation WHERE userID='"+ObjToStringValue+"'";
 
@@ -208,19 +212,6 @@ ResultSet rs = pstmt.executeQuery();
 			
 		</div>
 	</div>
-	
-	<script>
-	function deleteBuilding(tagId) {
-		if(confirm("데이터를 삭제하시겠습니까?")){
-			location.href='https://www.naver.com';
-		}else {
-			
-		}
-		
-				
-	}
-	
-	
-	</script>
+
 </body>
 </html>

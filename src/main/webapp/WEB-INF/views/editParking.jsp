@@ -243,7 +243,7 @@ String ObjToParkingValue = (String)getData2;
 if(ObjToStringValue==null){
 	PrintWriter script = response.getWriter();
 	script.println("<script>");
-	script.println("location.href='index.jsp';");
+	script.println("location.href='/';");
 	script.println("</script>");
 }
 %>

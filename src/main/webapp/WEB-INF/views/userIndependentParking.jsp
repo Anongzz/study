@@ -210,7 +210,7 @@ tr:last-child td:last-child {
 	<p>
 		LoginID:
 		<%=ObjToStringValue%></p>
-		<input type="button" value="로그아웃" onclick="location.href='LogOut.jsp'"
+		<input type="button" value="로그아웃" onclick="location.href='/'"
 			style="position: absolute; right: 10px;">
 	<div class="centerLogin">
 		<h1><%=ObjBuildingValue %>의 주차 현황</h1>

@@ -184,7 +184,7 @@ ResultSet rs = pstmt.executeQuery();
 
 %>
 <p>로그인ID: <%=userSessionValue %></p>
-<%--<input type="button" value="로그아웃" onclick="location.href='LogOut.jsp'" style="position: absolute; right: 10px;">--%>
+<input type="button" value="로그아웃" onclick="location.href='/'" style="position: absolute; right: 10px;">
 	<div class="centerLogin">
 		<h1><%=userSessionValue %>님의 주차장 목록</h1>
 		<div class="buildings">
@@ -199,9 +199,9 @@ ResultSet rs = pstmt.executeQuery();
 					<div onclick="location.href='/parking/<%=userSessionValue%>/<%=bName%>'" style="position: absolute; width: 200px; height: 280px;">
 						<p style="position: absolute; width: 180px; margin: 10px 10px;"><b><%=bName %></b><br><br>등록일: <%=bDate %></p>
 					</div>
-				<img alt="edit_building" src="edit.png" width="30" height="30" style="position: absolute; left: 200px; " onclick="location.href='editBuilding.mvc?data1=<%=userSessionValue%>&data2=<%=bName %>'">
+				<img alt="edit_building" src="edit.png" width="30" height="30" style="position: absolute; left: 200px; " onclick="location.href='/editParking/<%=bName%>'">
 				<img alt="delete_building" src="delete.png" width="30" height="30" style="position: absolute; left: 200px; top: 40px;" id="<%=bName %>"
-				onclick="(function(){if(confirm('데이터를 삭제하시겠습니까?')){location.href='deleteBuilding.mvc?data1=<%=userSessionValue%>&data2=<%=bName %>';}else{}})();">
+				onclick="(function(){if(confirm('데이터를 삭제하시겠습니까?')){location.href='/delete/<%=userSessionValue%>/<%=bName%>';}else{}})();">
 					
 				</div>
 			</div>

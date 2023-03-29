@@ -3,12 +3,6 @@ package com.example.study.dao;
 import com.example.study.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.sql.*;
 
 @Component
@@ -117,6 +111,38 @@ public class UserDAO {
 
 
     } //GetParkingList()
+
+    public int edit(UserDTO userDTO){//회원가입 정보 추가 쿼리 전송
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DriverManager.getConnection(url,name,password);
+            String sql = "update parkingprice set basicPrice=?,basicTime=?,addPrice=?,addTime=? where userID=? and buildingName=?;";
+
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, Integer.parseInt(userDTO.getBasicPrice()));
+            pstmt.setInt(2, Integer.parseInt(userDTO.getBasicTime()));
+            pstmt.setInt(3, Integer.parseInt(userDTO.getAddPrice()));
+            pstmt.setInt(4, Integer.parseInt(userDTO.getAddTime()));
+            pstmt.setString(5, userDTO.getUserID());
+            pstmt.setString(6, userDTO.getUserParking());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return 1;
+    } //edit()
 
 
 

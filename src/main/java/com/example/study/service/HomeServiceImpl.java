@@ -60,4 +60,28 @@ public class HomeServiceImpl implements HomeService {
         }
 
     }//UserElementList()
+
+    @Override
+    public String EditParking(String userID, String userParking, String basicPrice, String basicTime, String addPrice, String addTime){
+        UserDTO userDTO = UserDTO.builder()
+                .userID(userID)
+                .userParking(userParking)
+                .basicPrice(basicPrice)
+                .basicTime(basicTime)
+                .addPrice(addPrice)
+                .addTime(addTime)
+                .build();
+        System.out.println(userID);
+        System.out.println(userParking);
+        System.out.println(basicPrice);
+        System.out.println(basicTime);
+        System.out.println(addPrice);
+        System.out.println(addTime);
+
+        if(userDAO.edit(userDTO)==1){
+            return "success";
+        }else {
+            return "fail";
+        }
+    }
 }//class HomeServiceImpl

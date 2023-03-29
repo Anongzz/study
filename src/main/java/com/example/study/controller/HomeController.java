@@ -2,13 +2,13 @@ package com.example.study.controller;
 
 import com.example.study.service.HomeService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 @Controller
@@ -29,6 +29,18 @@ public class HomeController {
         return "Join_Account";
     }
 
+    @GetMapping("/userBuildings")
+    public String userBuildings(){ return "userBuildings";}
+
+    @GetMapping("/editParking/{PName}")
+    public String editParking(@PathVariable String PName, HttpServletRequest request){
+        HttpSession session = request.getSession();
+
+        session.setAttribute("buildingName",PName);
+
+        return "editParking";
+    }
+
     @PostMapping("/account")//회원가입 데이터 전송 및 추가
     public String accountUser(String userID, String userName, String userPW) {
         String result = homeService.Account(userID,userName,userPW);
@@ -42,7 +54,7 @@ public class HomeController {
     }//accountUser()
 
     @PostMapping("/login")//로그인 | 로그인 성공시 세션에 유저ID 저장
-    public String loginCheckUser(String userID, String userPW, HttpServletRequest request){
+    public String loginCheckUser(String userID, String userPW, HttpServletRequest request) {
         String result = homeService.Login(userID,userPW);
 
         if(result.equalsIgnoreCase("success")){
@@ -69,6 +81,25 @@ public class HomeController {
             return "fail";
         }
     }// ParkingList()
+
+    @PostMapping("/edit")//유저 고유 데이터 수정
+    public String EditList(String basicPrice, String basicTime, String addPrice, String addTime, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String userID = (String)session.getAttribute("id");
+        String PName = (String)session.getAttribute("buildingName");
+
+
+        String result = homeService.EditParking(userID,PName,basicPrice,basicTime,addPrice,addTime);
+
+        if(result.equalsIgnoreCase("success")){
+            return "/userBuildings";
+        }else {
+            return "fail";
+        }
+
+    }//EditList()
+
+
 
 
 

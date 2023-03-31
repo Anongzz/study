@@ -9,4 +9,8 @@ public interface HomeService{
     String UserElementList(String userID, String userParking, String CheckID);
 
     String EditParking(String userID, String userParking, String basicPrice, String basicTime, String addPrice, String addTime);
+
+    String DeleteParking(String userID,String userParking);
+
+    String CreateParking(String userID, String userParking,String basicPrice, String basicTime, String addPrice, String addTime);
 }//interface HomeService

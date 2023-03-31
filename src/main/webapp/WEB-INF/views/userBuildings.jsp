@@ -201,13 +201,13 @@ ResultSet rs = pstmt.executeQuery();
 					</div>
 				<img alt="edit_building" src="edit.png" width="30" height="30" style="position: absolute; left: 200px; " onclick="location.href='/editParking/<%=bName%>'">
 				<img alt="delete_building" src="delete.png" width="30" height="30" style="position: absolute; left: 200px; top: 40px;" id="<%=bName %>"
-				onclick="(function(){if(confirm('데이터를 삭제하시겠습니까?')){location.href='/delete/<%=userSessionValue%>/<%=bName%>';}else{}})();">
+				onclick="(function(){if(confirm('데이터를 삭제하시겠습니까?')){location.href='/delete/<%=bName%>';}else{}})();">
 					
 				</div>
 			</div>
 			<%} %>
 			
-			<div class="buildObj2" onclick="location.href='CreateBuildings.jsp'">
+			<div class="buildObj2" onclick="location.href='/createParking'">
 				<img alt="add_building" src="plus.png" width="200" height="200" style="position: absolute;">
 			</div>
 			

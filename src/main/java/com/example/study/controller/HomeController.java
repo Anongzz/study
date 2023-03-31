@@ -32,6 +32,9 @@ public class HomeController {
     @GetMapping("/userBuildings")
     public String userBuildings(){ return "userBuildings";}
 
+    @GetMapping("/createParking")
+    public String createParking(){return "CreateParking";}
+
     @GetMapping("/editParking/{PName}")
     public String editParking(@PathVariable String PName, HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -39,7 +42,7 @@ public class HomeController {
         session.setAttribute("buildingName",PName);
 
         return "editParking";
-    }
+    }//editParking()
 
     @PostMapping("/account")//회원가입 데이터 전송 및 추가
     public String accountUser(String userID, String userName, String userPW) {
@@ -98,6 +101,36 @@ public class HomeController {
         }
 
     }//EditList()
+
+    @GetMapping("/delete/{PName}")
+    public String DeleteList(HttpServletRequest request,@PathVariable String PName){
+        HttpSession session = request.getSession();
+        String userID = (String)session.getAttribute("id");
+        System.out.println("userid: "+userID);
+        System.out.println("Pname: "+PName);
+
+        String result = homeService.DeleteParking(userID,PName);
+
+        if(result.equalsIgnoreCase("success")){
+            return "userBuildings";
+        }else {
+            return "fail";
+        }
+    }//DeleteList()
+
+    @PostMapping("/create")
+    public String createList(String buildingName,String basicPrice, String basicTime, String addPrice, String addTime, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String userID = (String) session.getAttribute("id");
+
+        String result = homeService.CreateParking(userID, buildingName, basicPrice, basicTime, addPrice, addTime);
+
+        if(result.equalsIgnoreCase("success")){
+            return "userBuildings";
+        }else {
+            return "fail";
+        }
+    }
 
 
 

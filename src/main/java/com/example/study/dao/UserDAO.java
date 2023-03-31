@@ -144,8 +144,87 @@ public class UserDAO {
         return 1;
     } //edit()
 
+    public int delete(UserDTO userDTO){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
 
+        try {
+            conn = DriverManager.getConnection(url,name,password);
+            String sql = "DELETE FROM a, b USING buildinginformation AS a LEFT JOIN parkingprice AS b ON a.userID = b.userID and a.buildingName = b.buildingName WHERE b.userID = ? and a.buildingName =?";
 
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, userDTO.getUserID());
+            pstmt.setString(2, userDTO.getUserParking());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return 1;
+    }//delete()
+
+    public int create_1(UserDTO userDTO){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DriverManager.getConnection(url,name,password);
+            String sql = "INSERT INTO buildingInformation VALUES (?,?,now())";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userDTO.getUserID());
+            pstmt.setString(2, userDTO.getUserParking());
+            return pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }//create_1()
+
+    public int create_2(UserDTO userDTO){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = DriverManager.getConnection(url,name,password);
+            String sql = "INSERT INTO parkingPrice VALUES (?,?,?,?,?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userDTO.getUserID());
+            pstmt.setString(2, userDTO.getUserParking());
+            pstmt.setInt(3, Integer.parseInt(userDTO.getBasicPrice()));
+            pstmt.setInt(4, Integer.parseInt(userDTO.getBasicTime()));
+            pstmt.setInt(5, Integer.parseInt(userDTO.getAddPrice()));
+            pstmt.setInt(6, Integer.parseInt(userDTO.getAddTime()));
+            return pstmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }//create_2()
 
 
 }//class UserDAO

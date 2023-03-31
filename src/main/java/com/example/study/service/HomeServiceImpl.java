@@ -71,17 +71,40 @@ public class HomeServiceImpl implements HomeService {
                 .addPrice(addPrice)
                 .addTime(addTime)
                 .build();
-        System.out.println(userID);
-        System.out.println(userParking);
-        System.out.println(basicPrice);
-        System.out.println(basicTime);
-        System.out.println(addPrice);
-        System.out.println(addTime);
 
         if(userDAO.edit(userDTO)==1){
             return "success";
         }else {
             return "fail";
         }
+    }
+
+    @Override
+    public String DeleteParking(String userID,String userParking){
+        UserDTO userDTO = UserDTO.builder()
+                .userID(userID)
+                .userParking(userParking)
+                .build();
+
+        if(userDAO.delete(userDTO)==1){
+            return "success";
+        }else {
+            return "fail";
+        }
+    }//DeleteParking()
+
+    @Override
+    public String CreateParking(String userID, String userParking,String basicPrice, String basicTime, String addPrice, String addTime){
+        UserDTO userDTO = UserDTO.builder()
+                .userID(userID)
+                .userParking(userParking)
+                .basicPrice(basicPrice)
+                .basicTime(basicTime)
+                .addPrice(addPrice)
+                .addTime(addTime)
+                .build();
+        System.out.println("create1: "+userDAO.create_1(userDTO));
+        System.out.println("create2: "+userDAO.create_2(userDTO));
+        return "success";
     }
 }//class HomeServiceImpl

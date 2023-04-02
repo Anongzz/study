@@ -1,6 +1,8 @@
 package com.example.study.controller;
 
+import com.example.study.dto.UserDTO;
 import com.example.study.service.HomeService;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +47,7 @@ public class HomeController {
     }//editParking()
 
     @PostMapping("/account")//회원가입 데이터 전송 및 추가
-    public String accountUser(String userID, String userName, String userPW) {
+    public String accountUser(String userID, String userName, String userPW) { // 요청 파라미터 빈 값 처리 -> NULL, 기본값을 설정하거나, wrapper 클래스로 처리
         String result = homeService.Account(userID,userName,userPW);
 
         if(result.equalsIgnoreCase("success")){
@@ -56,6 +58,38 @@ public class HomeController {
 
     }//accountUser()
 
+    /*
+    // @ModelAttribute 예제 설명용
+    @PostMapping("/account")//회원가입 데이터 전송 및 추가
+    public String accountUser2(UserDTO userDTO) { // 기본 String, int, Integer 는 요청 파라미터를 쓰면 자동으로 @RequestParam, 하지만 커스텀 클래스는 자동으로 @ModelAttribute
+        String result = homeService.Account(userID,userName,userPW);
+
+        if(result.equalsIgnoreCase("success")){
+            return "success";
+        }else {
+            return "fail";
+        }
+
+    }//accountUser()
+    */
+
+    /*
+    @PostMapping("/account")//회원가입 데이터 전송 및 추가
+    @ResponseBody
+    public String accountUser2(@RequestBody String messageBody) { // 기본 String, int, Integer 는 요청 파라미터를 쓰면 자동으로 @RequestParam, 하지만 커스텀 클래스는 자동으로 @ModelAttribute
+
+        String result = homeService.Account(userID,userName,userPW);
+
+        if(result.equalsIgnoreCase("success")){
+            return "success";
+        }else {
+            return "fail";
+        }
+
+        return "--JSON 문자열--";
+    }//accountUser()
+    */
+
     @PostMapping("/login")//로그인 | 로그인 성공시 세션에 유저ID 저장
     public String loginCheckUser(String userID, String userPW, HttpServletRequest request) {
         String result = homeService.Login(userID,userPW);
@@ -63,7 +97,7 @@ public class HomeController {
         if(result.equalsIgnoreCase("success")){
             HttpSession session = request.getSession();
             session.setAttribute("id",userID);
-            return "userBuildings";
+            return "redirect:/userBuildings";
         }else {
             return "fail";
         }
@@ -95,7 +129,7 @@ public class HomeController {
         String result = homeService.EditParking(userID,PName,basicPrice,basicTime,addPrice,addTime);
 
         if(result.equalsIgnoreCase("success")){
-            return "/userBuildings";
+            return "redirect:/userBuildings";
         }else {
             return "fail";
         }
@@ -112,7 +146,7 @@ public class HomeController {
         String result = homeService.DeleteParking(userID,PName);
 
         if(result.equalsIgnoreCase("success")){
-            return "userBuildings";
+            return "redirect:/userBuildings";
         }else {
             return "fail";
         }
@@ -126,7 +160,7 @@ public class HomeController {
         String result = homeService.CreateParking(userID, buildingName, basicPrice, basicTime, addPrice, addTime);
 
         if(result.equalsIgnoreCase("success")){
-            return "userBuildings";
+            return "redirect:/userBuildings";
         }else {
             return "fail";
         }

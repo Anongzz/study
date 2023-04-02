@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-
 public class UserDTO {
     private String userID;//유저ID
     private String checkID;//유저ID 확인용 String

@@ -87,6 +87,8 @@ public class UserDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }catch (NumberFormatException e){
+            return 2;
         }finally {
             try {
                 if (pstmt != null) pstmt.close();
@@ -132,7 +134,10 @@ public class UserDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        }catch (NumberFormatException e){
+            return 2;
+        }
+        finally {
             try {
                 if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
@@ -160,6 +165,8 @@ public class UserDAO {
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }catch (NumberFormatException e){
+            return 2;
         }finally {
             try {
                 if (pstmt != null) pstmt.close();
@@ -184,9 +191,13 @@ public class UserDAO {
             pstmt.setString(2, userDTO.getUserParking());
             return pstmt.executeUpdate();
 
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+            return 2;
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+            return 2;
+        } finally {
             try {
                 if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
@@ -194,7 +205,6 @@ public class UserDAO {
                 e.printStackTrace();
             }
         }
-        return -1;
     }//create_1()
 
     public int create_2(UserDTO userDTO){
@@ -213,9 +223,13 @@ public class UserDAO {
             pstmt.setInt(6, Integer.parseInt(userDTO.getAddTime()));
             return pstmt.executeUpdate();
 
+        } catch (NumberFormatException e){
+            e.printStackTrace();
+            return 2;
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+            return 2;
+        } finally {
             try {
                 if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
@@ -223,7 +237,6 @@ public class UserDAO {
                 e.printStackTrace();
             }
         }
-        return -1;
     }//create_2()
 
 

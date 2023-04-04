@@ -252,7 +252,7 @@ if(ObjToStringValue==null){
 		<h1>새로운 주차장 정보 생성</h1>
 		<form method="post" action="/create">
         <div class="txt_field" >
-          <input type="text" name="buildingName" required>
+          <input type="text" name="userParking" required>
           <span></span>
           <label>주차장 이름(주차장 이름은 생성 후 변경할 수 없습니다.)</label>
         </div>

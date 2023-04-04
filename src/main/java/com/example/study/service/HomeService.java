@@ -1,5 +1,7 @@
 package com.example.study.service;
 
+import com.example.study.dto.UserDTO;
+
 public interface HomeService{
     //함수()
     String Account (String userID, String userName, String userPW);

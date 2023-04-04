@@ -45,6 +45,7 @@ public class HomeServiceImpl implements HomeService {
         }
     }//Login()
 
+
     @Override
     public String UserElementList(String userID, String userParking,String checkID){
         UserDTO userDTO = UserDTO.builder()
@@ -103,8 +104,8 @@ public class HomeServiceImpl implements HomeService {
                 .addPrice(addPrice)
                 .addTime(addTime)
                 .build();
-        System.out.println("create1: "+userDAO.create_1(userDTO));
-        System.out.println("create2: "+userDAO.create_2(userDTO));
+        userDAO.create_1(userDTO);
+        userDAO.create_2(userDTO);
         return "success";
     }
 }//class HomeServiceImpl

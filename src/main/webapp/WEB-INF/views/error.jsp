@@ -9,7 +9,7 @@
 <body>
 <h1>FAIL!</h1>
 <script>
-    alert("입력한 값이 없거나 올바르지 않습니다!");
+    alert("비정상적인 접근입니다.");
     window.location.replace("http://localhost:8080/");
 </script>
 </body>

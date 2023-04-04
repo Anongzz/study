@@ -16,6 +16,15 @@ public class UserDTO {
     private String userPWC;//회원가입 시 비밀번호 체크 추가예정
 
     private String basicPrice;//기본요금
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public void setUserParking(String userParking) {
+        this.userParking = userParking;
+    }
+
     private String basicTime;//기본시간
     private String addPrice;//추가요금
     private String addTime;//추가시간
@@ -33,7 +42,6 @@ public class UserDTO {
         this.addPrice = addPrice;
         this.addTime = addTime;
     }//UserDTO()
-
 
 
 
